@@ -1,0 +1,44 @@
+=====================================================================
+  GOALWAVE E2  -  أوامر التثبيت عبر Telnet / SSH   (المطور: mouad)
+=====================================================================
+ادخل على الجهاز بـ Telnet أو SSH بحساب root، ثم انسخ أحد الأوامر:
+
+--- 1) التثبيت / التحديث (الأمر الموصى به) --------------------------
+wget -q -O - https://raw.githubusercontent.com/networkiyou-jpg/Golawev/main/install.sh | sh
+
+--- إن كان جهازك لا يحتوي wget، استخدم curl -------------------------
+curl -fsSL https://raw.githubusercontent.com/networkiyou-jpg/Golawev/main/install.sh | sh
+
+--- إن فشل التحميل بسبب شهادات HTTPS في الصورة القديمة --------------
+wget -q --no-check-certificate -O - https://raw.githubusercontent.com/networkiyou-jpg/Golawev/main/install.sh | GW_INSECURE=1 sh
+(التحقق من سلامة الحزمة بالبصمة SHA-256 يبقى مفعّلاً)
+
+--- 2) الإزالة (تبقى إعداداتك) --------------------------------------
+wget -q -O - https://raw.githubusercontent.com/networkiyou-jpg/Golawev/main/install.sh | sh -s -- remove
+
+--- 3) الإزالة مع حذف الإعدادات --------------------------------------
+wget -q -O - https://raw.githubusercontent.com/networkiyou-jpg/Golawev/main/install.sh | sh -s -- purge
+
+--- 4) حالة التثبيت + معلومات الدعم -----------------------------------
+wget -q -O - https://raw.githubusercontent.com/networkiyou-jpg/Golawev/main/install.sh | sh -s -- status
+
+--- 5) آخر سطور السجل (أرسلها للمطور عند وجود مشكلة) -----------------
+wget -q -O - https://raw.githubusercontent.com/networkiyou-jpg/Golawev/main/install.sh | sh -s -- log
+
+--- 6) تثبيت يدوي بدون سكربت -----------------------------------------
+cd /tmp
+wget -q -O enigma2-plugin-extensions-goalwave_1.4.1_all.ipk https://raw.githubusercontent.com/networkiyou-jpg/Golawev/main/enigma2-plugin-extensions-goalwave_1.4.1_all.ipk
+opkg install /tmp/enigma2-plugin-extensions-goalwave_1.4.1_all.ipk
+killall -9 enigma2
+
+--- 7) تثبيت من فلاشة USB ---------------------------------------------
+انسخ ملف .ipk إلى الفلاشة ثم:
+opkg install /media/usb/enigma2-plugin-extensions-goalwave_1.4.1_all.ipk
+killall -9 enigma2
+
+--- ملاحظات -----------------------------------------------------------
+* لا تضع مسافات داخل الأمر، وانسخه كسطر واحد.
+* بعد التثبيت تعاد الواجهة تلقائياً (GUI restart). لمنع ذلك: GW_NORESTART=1
+* لمراجعة السكربت قبل تشغيله: افتح الرابط في المتصفح:
+  https://raw.githubusercontent.com/networkiyou-jpg/Golawev/main/install.sh
+* الدعم: تيليجرام @Kingsharing1
